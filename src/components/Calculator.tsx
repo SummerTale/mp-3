@@ -1,71 +1,74 @@
 import React, { useState } from "react";
-
-const Calculator: React.FC = () => {
-  const [num1, setNum1] = useState<number | "">("");
-  const [num2, setNum2] = useState<number | "">("");
+function Calculator() {
+  const [first, setFirst] = useState<number | "">("");
+  const [second, setSecond] = useState<number | "">("");
   const [result, setResult] = useState<number | null>(null);
 
-  // Handle operation
-  const calculate = (operator: string) => {
-    if (num1 === "" || num2 === "") {
+  function Calculate(op:string) {
+    if (first === "" || second === "") {
       alert("Please enter both numbers.");
       return;
     }
-
-    const a = Number(num1);
-    const b = Number(num2);
-    let res = 0;
-
-    switch (operator) {
-      case "+": res = a + b; break;
-      case "-": res = a - b; break;
-      case "*": res = a * b; break;
-      case "/": res = b !== 0 ? a / b : NaN; break;
-      case "^": res = Math.pow(a, b); break;
+    const num1 = Number(first);
+    const num2 = Number(second);
+    let answer = 0;
+    switch (op) {
+      case "+": answer = num1 + num2; break;
+      case "-": answer = num1 - num2; break;
+      case "*": answer = num1 * num2; break;
+      case "/": answer = num2 !== 0 ? num1 / num2 : NaN; break;
+      case "^": answer = power(num1, num2); break;
+      default: return;
     }
-
-    setResult(res);
+    setResult(answer);
+  };
+  function power(base:number, exponent:number){
+    if (exponent === 0) return 1;
+    let result = 1;
+    for (let i = 0; i < Math.abs(exponent); i++) {
+      result *= base;
+    }
+    return exponent > 0 ? result : 1 / result;
   };
 
-  // Clear calculator
-  const clear = () => {
-    setNum1("");
-    setNum2("");
+  function ClearAll(){
+    setFirst("");
+    setSecond("");
     setResult(null);
   };
 
-  return (
-    <section>
+  return(
+    <div className="calculator">
       <h2>Calculator</h2>
-      <input
-        type="number"
-        placeholder="First Number"
-        value={num1}
-        onChange={(e) => setNum1(e.target.value === "" ? "" : Number(e.target.value))}
-      />
-      <input
-        type="number"
-        placeholder="Second Number"
-        value={num2}
-        onChange={(e) => setNum2(e.target.value === "" ? "" : Number(e.target.value))}
-      />
-      <div>
-        <button onClick={() => calculate("+")}>+</button>
-        <button onClick={() => calculate("-")}>-</button>
-        <button onClick={() => calculate("*")}>×</button>
-        <button onClick={() => calculate("/")}>÷</button>
-        <button onClick={() => calculate("^")}>^</button>
-        <button onClick={clear}>Clear</button>
+      <div className="inputs">
+        <input
+          type="number"
+          placeholder="First number"
+          value={first}
+          onChange={(e) => setFirst(e.target.value === "" ? "" : Number(e.target.value))}
+        />
+        <input
+          type="number"
+          placeholder="Second number"
+          value={second}
+          onChange={(e) => setSecond(e.target.value === "" ? "" : Number(e.target.value))}
+        />
       </div>
+
+      <div className="buttons">
+        {["+", "-", "*", "/", "^"].map((op) => (
+          <button key={op} onClick={() => Calculate(op)}>{op}</button>
+        ))}
+        <button onClick={ClearAll}>Clear</button>
+      </div>
+
       {result !== null && (
-        <h3
-          style={{
-            color: result < 0 ? "red" : "#2c3e50"
-          }}>
-          Result: {isNaN(result) ? "Cannot divide by 0" : result}
-        </h3>
+        <div className="result">
+          <strong>Result:</strong>{" "}
+          {isNaN(result) ? "Oops! Division by zero." : result}
+        </div>
       )}
-    </section>
+    </div>
   );
 };
 

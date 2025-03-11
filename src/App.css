@@ -6,7 +6,7 @@ body {
 }
 
 /* Container wraps nav + content */
-.app-layout {
+.layout {
   display: flex;
   flex-direction: row;
 }
@@ -48,7 +48,7 @@ nav ul li a:hover {
 
 /* Mobile view: nav becomes horizontal on top */
 @media screen and (max-width: 750px) {
-  .app-layout {
+  .layout {
     flex-direction: column;
   }
 

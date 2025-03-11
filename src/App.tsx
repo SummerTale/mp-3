@@ -15,16 +15,16 @@ function App() {
   return (
     <Router>
       <Header />
-      <div className="app-layout">
+      <div className="layout">
         <Navbar />
         <main className="page-content">
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/education" element={<EducationPage />} />
-            <Route path="/experience" element={<ExperiencePage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/skills" element={<SkillsPage />} />
+            <Route path="/" element={<HomePage/>} />
+            <Route path="/contact" element={<ContactPage/>} />
+            <Route path="/education" element={<EducationPage/>} />
+            <Route path="/experience" element={<ExperiencePage/>} />
+            <Route path="/projects" element={<ProjectsPage/>} />
+            <Route path="/skills" element={<SkillsPage/>} />
           </Routes>
         </main>
       </div>

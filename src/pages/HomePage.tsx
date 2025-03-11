@@ -1,9 +1,10 @@
 import React from "react";
 
+
 function HomePage(){
     return (
         <div>
-            <h1>Welcome to My Portfolio</h1>
+            <h1>Welcome to My Portfolio - KV</h1>
             <section>
                 <p>Hello! I'm Kavya Verma, a passionate web developer currently pursuing a Master's in Computer Information Systems with a concentration in Web Development.</p>
             </section>
